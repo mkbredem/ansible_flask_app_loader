@@ -9,6 +9,9 @@
 - name: Add subscription
   hosts: load_balancers,database_servers,backend_servers
   gather_facts: true
+  vars:
+    satellite_activationkey: gpte-labs-rhel8
+    satellite_org: prod
   tasks:
     - debug:
         msg: "{{ hostvars['control'].ansible_default_ipv4.address }}, {{ hostvars['control'].ansible_dns.nameservers.0 }} "
@@ -39,11 +42,11 @@
 
     - name: register system and attach subs
       redhat_subscription:
-        state:   present
-        username: "admin"
-        password: "r3dh4t1!"
+        state: present
+        activationkey: "{{ satellite_activationkey }}"
+        org_id: "{{ satellite_org }}"
         auto_attach: true
-    
+
     - name: install firewalld
       yum:
         name: firewalld
