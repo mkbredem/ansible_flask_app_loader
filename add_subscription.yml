@@ -2,6 +2,10 @@
   tasks:
     - debug:
       
+- hosts: satellite
+  tasks:
+    - debug:
+
 - name: Add subscription
   hosts: load_balancers,database_servers,backend_servers
   gather_facts: true
@@ -19,17 +23,20 @@
     - name: DNS IP updated
       lineinfile:
         state: present
-        path: /etc/sysconfig/network-scripts/ifcfg-eth0
-        line: "{{ item }}"
-      loop:
-        - PEERDNS=no
-        - DNS1={{ hostvars.control.ansible_default_ipv4.address }}
-      register: network_update
+        path: /etc/hosts
+        line: "{{ hostvars.satellite.ansible_default_ipv4 }}" "{{ hostvars.satellite.ansible_fqdn }}"
 
     - name: Restart NetworkManager
       service:
         name: NetworkManager
         state: restarted
+
+    - name: ********test**********
+      debug:
+        var: "{{ hostvars.item.ansible_fqdn }}"
+      loop: groups['all']
+
+
 
     - name: install katello-ca-consumer package
       yum:
