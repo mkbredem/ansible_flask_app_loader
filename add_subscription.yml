@@ -31,10 +31,10 @@
         name: NetworkManager
         state: restarted
 
-    - name: ********test**********
-      debug:
-        var: "{{ hostvars.item.ansible_fqdn }}"
-      loop: groups['all']
+#    - name: ********test**********
+#      debug:
+#        var: "{{ hostvars.item.ansible_fqdn }}"
+#      loop: groups['all']
 
 
 
