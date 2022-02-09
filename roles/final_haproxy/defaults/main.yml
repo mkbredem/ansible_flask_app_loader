@@ -1,0 +1,5 @@
+---
+# defaults file for final_haproxy
+
+load_balancer_packages:
+  - haproxy

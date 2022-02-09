@@ -1,0 +1,20 @@
+---
+- name: Play to setup flask servers
+  hosts: app_servers
+  tasks:
+    - debug:
+        msg: "Start Flask App setup"
+
+
+
+    - name: Setup firewall
+      include_role:
+        name: firewall
+      vars:
+        firewall_tcp_ports:
+          - 443
+
+    - name: Setup apache server
+      include_role:
+        name: final_flask
+

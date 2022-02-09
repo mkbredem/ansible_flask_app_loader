@@ -1,0 +1,24 @@
+---
+
+- name: Play to setup postgres server
+  hosts: database_servers
+  tasks:
+    - debug:
+        msg: "Start postgress server setup"
+
+    - name: Setup firewall
+      include_role:
+        name: firewall
+      vars:
+        firewall_services:
+          - postgress
+        firewall_ports:
+          - 5432
+
+    - name: Setup mysql server
+      include_role:
+        name: final_postgres
+
+    - debug:
+        msg: "Finished postgres server setup"
+
