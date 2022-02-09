@@ -20,11 +20,11 @@
         +ipv4.dns {{ hostvars['control'].ansible_dns.nameservers.1 }}
         +ipv4.dns 8.8.8.8
 
-    - name: DNS IP updated
+    - name: add satellite to /etc/hosts
       lineinfile:
         state: present
         path: /etc/hosts
-        line: "{{ hostvars.satellite.ansible_default_ipv4 }} {{ hostvars.satellite.ansible_fqdn }}"
+        line: "{{ hostvars['satellite'].ansible_default_ipv4.address }} {{ hostvars.satellite.ansible_fqdn }}"
 
     - name: Restart NetworkManager
       service:
