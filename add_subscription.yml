@@ -20,6 +20,14 @@
         +ipv4.dns {{ hostvars['control'].ansible_dns.nameservers.1 }}
         +ipv4.dns 8.8.8.8
 
+    - name: create /etc/hosts
+      copy: 
+        content: | 
+          127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+          ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+        dest: /etc/hosts
+        create: yes
+
     - name: add satellite to /etc/hosts
       lineinfile:
         state: present
