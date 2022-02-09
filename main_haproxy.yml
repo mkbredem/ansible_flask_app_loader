@@ -7,7 +7,7 @@
 
     - name: Setup firewall
       include_role:
-        name: firewall
+        name: final_firewall
       vars:
         firewall_services:
           - http
