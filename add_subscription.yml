@@ -15,7 +15,17 @@
         ipv4.dns {{ hostvars['control'].ansible_default_ipv4.address }}
         +ipv4.dns {{ hostvars['control'].ansible_dns.nameservers.1 }}
         +ipv4.dns 8.8.8.8
-    
+
+    - name: DNS IP updated
+      lineinfile:
+        state: present
+        path: /etc/sysconfig/network-scripts/ifcfg-eth0
+        line: "{{ item }}"
+      loop:
+        - PEERDNS=no
+        - DNS1={{ hostvars.control.ansible_default_ipv4.address }}
+      register: network_update
+
     - name: Restart NetworkManager
       service:
         name: NetworkManager
