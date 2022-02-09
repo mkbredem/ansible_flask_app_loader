@@ -4,6 +4,7 @@
   package:
     name: "{{ __package }}"
     state: present
+    validate_certs: no
   loop:
     - "{{ postgres_rhel8_repo }}"
     - "{{ postgres_packages }}"
