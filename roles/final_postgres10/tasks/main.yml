@@ -16,20 +16,20 @@
     name: '@postgresql:10'
     state: present
 
-- name: Install a modularity appstream with defined stream
-  dnf:
-    name: '@postgresql:10-server'
-    state: present
-
-#- name: Install Postgres packages
-#  package:
-#    name: "{{ __package }}"
+#- name: Install a modularity appstream with defined stream
+#  dnf:
+#    name: '@postgresql:10-server'
 #    state: present
-#  loop: 
-#    - "{{ postgres_packages }}"
-#    - "{{ postgres_library }}"
-#  loop_control:
-#    loop_var: __package
+
+- name: Install Postgres packages
+  package:
+    name: "{{ __package }}"
+    state: present
+  loop: 
+    - "{{ postgres_packages }}"
+    - "{{ postgres_library }}"
+  loop_control:
+    loop_var: __package
 
 - name: Check if Postgres initialized
   stat:
