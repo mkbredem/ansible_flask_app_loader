@@ -5,8 +5,17 @@
   package:
     name: "{{ __package }}"
     state: present
+    disable_gpg_check: yes
   loop: 
     - "{{ postgres_rhel8_repo }}"        
+  loop_control:
+    loop_var: __package
+
+- name: Install Postgres packages
+  package:
+    name: "{{ __package }}"
+    state: present
+  loop: 
     - "{{ postgres_packages }}"
     - "{{ postgres_library }}"
   loop_control:
