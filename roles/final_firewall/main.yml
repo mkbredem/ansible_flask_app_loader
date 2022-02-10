@@ -1,5 +1,8 @@
 ---
 
+- debug:
+    msg: Startint firwall setup
+
 - name: Install Firewalld
   yum:
     name: firewalld
