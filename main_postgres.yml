@@ -49,7 +49,7 @@
 
     - name: Setup mysql server
       include_role:
-        name: final_postgres10
+        name: final_postgres12
 
     - debug:
         msg: "Finished postgres server setup"
