@@ -24,26 +24,18 @@
         state: started
 
     - name: Open service port
-      when: firewall_services is defined
       firewalld:
-        service: "{{ __service }}"
+        service: postgrs
         state: enabled
         immediate: true
         permanent: true
-      loop: "{{ firewall_services }}"
-      loop_control:
-        loop_var: __service
 
     - name: Open tcp port
-      when: firewall_tcp_ports is defined
       firewalld:
-        port: "{{ __tcp_port }}/tcp"
+        port: 5432/tcp
         permanent: yes
         immediate: yes
         state: enabled
-      loop: "{{ firewall_tcp_ports }}"
-      loop_control:
-        loop_var: __tcp_port
 
 
 #    - name: Setup firewall
