@@ -25,7 +25,7 @@
 
     - name: Open service port
       firewalld:
-        service: postgrs
+        service: postgres
         state: enabled
         immediate: true
         permanent: true
