@@ -4,7 +4,7 @@
     state: present
 
 - name: Install flask packages
-  package:
+  yum:
     name: "{{ __package }}"
     state: present
   loop: "{{ app_yum_packages }}"
