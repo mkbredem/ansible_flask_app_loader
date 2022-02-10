@@ -5,14 +5,30 @@
     - debug:
         msg: "Start HAproxy server setup"
 
+    - name: Install Firewalld
+      yum:
+        name: firewalld
+        state: latest
+   
+    - name: Start firewalld
+      service:
+        name: firewalld
+        enabled: yes
+        state: started
+
     - name: Setup firewall
-      include_role:
-        name: final_firewall
-      vars:
-        firewall_services:
-          - http
-        firewall_tcp_ports:
-          - 5000
+      firewalld:
+        service: http
+        permanent: yes
+        immediate: yes
+        state: enabled
+
+    - name: Setup firewall
+      firewalld:
+        port: 5000/tcp
+        permanent: yes
+        immediate: yes
+        state: enabled
 
     - name: Setup HAproxy server
       include_role:
