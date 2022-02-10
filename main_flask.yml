@@ -16,6 +16,12 @@
         enabled: yes
         state: started
 
+    - name: allow http service
+      firewalld:
+        service: http
+        permanent: yes
+        immediate: yes
+
     - name: Setup firewall
       firewalld:
         port: 443/tcp
