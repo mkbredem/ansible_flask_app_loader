@@ -5,14 +5,23 @@
     - debug:
         msg: "Start Flask App setup"
 
-
+    - name: Install Firewalld
+      yum:
+        name: firewalld
+        state: latest
+   
+    - name: Start firewalld
+      service:
+        name: firewalld
+        enabled: yes
+        state: started
 
     - name: Setup firewall
-      include_role:
-        name: final_firewall
-      vars:
-        firewall_tcp_ports:
-          - 443
+      firewalld:
+        port: 443/tcp
+        permanent: yes
+        immediate: yes
+        state: enabled
 
     - name: Setup apache server
       include_role:
