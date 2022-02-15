@@ -31,7 +31,7 @@
  
     - name: Check webserver for correct response
       uri:
-        url: "http://frontend.example.com/ping"
+        url: "http://192.168.51.13/ping"
         return_content: yes
       until: '"alive" in result.content'
       retries: 10
