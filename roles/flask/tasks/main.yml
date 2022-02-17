@@ -9,6 +9,7 @@
 #    line: "{{ groups.database_servers[0].default_ipv4.address }} database-01"
     line: "{{ hostvars['appdb1']['ansible_default_ipv4']['address'] }} database-01" #appdb1"
     state: present
+  ignore_errors: yes
 
 - name: Create flask user
   user:
