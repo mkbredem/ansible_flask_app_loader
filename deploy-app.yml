@@ -49,6 +49,35 @@
   tags:
     - application_servers
 
+  pre_tasks:
+    - debug:
+        msg: "Start postgress server setup"
+
+    - name: Install Firewalld
+      yum:
+        name: firewalld
+        state: latest
+
+    - name: Start firewalld
+      service:
+        name: firewalld
+        enabled: yes
+        state: started
+
+    - name: Open service port
+      firewalld:
+        service: postgresql
+        state: enabled
+        immediate: true
+        permanent: true
+
+    - name: Open tcp port
+      firewalld:
+        port: 5432/tcp
+        permanent: yes
+        immediate: yes
+        state: enabled
+        
   roles:
 
     - flask
