@@ -3,14 +3,12 @@
   hosts: app_servers:database_servers
   gather_facts: true
   become: true
-  tags:
-    - smoketest  
 
   tasks:
 
     - debug:
         msg: 
-          - "IP is {{ hostvars['database-01']['ansible_default_ipv4']['address'] }}"
+          - "IP is {{ hostvars[groups.app_servers[0]]['ansible_default_ipv4']['address'] }}"
           - "First App server  {{ groups.app_servers[0] }}" 
         verbosity: 2        
 
@@ -24,20 +22,16 @@
         ssl_mode: disable
       delegate_to: "{{ groups.app_servers[0] }}"
       run_once: true
-      tags:
-        - smoketest
 
 - name: End to end smoke tests
   hosts: app_servers
   become: false
   gather_facts: false
-  tags:
-    - smoketest  
   tasks:
  
     - name: Check webserver for correct response
       uri:
-        url: "http://frontend.example.com/ping"
+        url: "http://192.168.51.13/ping"
         return_content: yes
       until: '"alive" in result.content'
       retries: 10
