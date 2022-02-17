@@ -1,4 +1,7 @@
 ---
+- debug:
+    var: groups.database_servers[0]
+
 - name: Add appdb1 IP address to app servers /etc/hosts
   lineinfile:
     dest: /etc/hosts
