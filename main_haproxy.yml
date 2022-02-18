@@ -32,8 +32,7 @@
 
     - name: Setup HAproxy server
       include_role:
-        name: haproxy
-        #name: final_haproxy
+        name: final_haproxy
 
     - debug:
         msg: "Finished HAproxy server setup"
