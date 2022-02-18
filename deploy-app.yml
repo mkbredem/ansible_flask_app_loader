@@ -79,8 +79,8 @@
         state: enabled
         
   roles:
-
-    - flask
+    - final_flask
+    #- flask
     
 - name: Deploy haproxy load balancer
   hosts: load_balancers
