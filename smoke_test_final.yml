@@ -1,5 +1,5 @@
 - name: End to end smoke tests
-  hosts: app_servers
+  hosts: localhost
   become: false
   gather_facts: false
   tags:
